@@ -11,6 +11,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), provideHttpClient(), 
+    
     provideTranslateService({
         loader: provideTranslateHttpLoader({
             prefix: './i18n/',
