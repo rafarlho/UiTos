@@ -4,25 +4,25 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatButtonModule } from "@angular/material/button"
 import { ApiConfiguration, organizationGetAllGet } from './api';
 import { HttpClient } from '@angular/common/http';
-import { WithHttp } from './core/decorators/with-http.decorator';
+import { WithHttp } from './shared/decorators/with-http.decorator';
+import { SidenavLayoutComponent } from "./shared/components/sidenav-layout/sidenav-layout.component";
 
-@WithHttp()
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,MatButtonModule],
+  imports: [RouterOutlet, MatButtonModule, SidenavLayoutComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
-})
+})  
+@WithHttp()
 export class App {
   protected readonly title = signal('UiTos');
 
   private translateService = inject(TranslateService)
   // private http = HttpClient
 
-
   http!: HttpClient;
   apiUrl!: string;
-
+  
   constructor() {
     this.translateService.addLangs(['pt']);
     this.translateService.setFallbackLang('pt');
