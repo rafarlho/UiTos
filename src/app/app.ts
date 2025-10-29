@@ -9,7 +9,7 @@ import { SidenavLayoutComponent } from "./shared/components/sidenav-layout/siden
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatButtonModule, SidenavLayoutComponent],
+  imports: [RouterOutlet, MatButtonModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })  

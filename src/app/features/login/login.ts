@@ -5,6 +5,7 @@ import { NgxNeonUnderlineComponent } from '@omnedia/ngx-neon-underline';
 import { NgxFadeComponent } from '@omnedia/ngx-fade';
 import { NgxHighlighterComponent } from "@omnedia/ngx-highlighter";
 import { Auth0ClientService } from '@auth0/auth0-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,9 +21,11 @@ import { Auth0ClientService } from '@auth0/auth0-angular';
 })
 export class Login {
   private readonly auth = inject(Auth0ClientService)
+  private readonly router = inject(Router)
   handleLoginClick() {
     this.auth.loginWithPopup().then(()=> {
       console.log(this.auth.getUser().then((data)=> console.log(data)) )
+      this.router.navigate(["home"])
     })
     .catch((reason: any) => {console.log(reason)})
   }

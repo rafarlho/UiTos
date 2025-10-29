@@ -11,17 +11,24 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      @if (isHandset$ | async) {
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          matIconButton
-          (click)="drawer.toggle()">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    <mat-toolbar color="primary" class="flex justify-between items-center" >
+      <div>
+        @if (isHandset$ | async) {
+          <button
+            type="button"
+            aria-label="Toggle sidenav"
+            matIconButton
+            (click)="drawer.toggle()">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+        }
+        <span>Task Orchestration Service</span>
+      </div>
+      <div>
+        <button matFab > 
+          <img class="border border-white rounded-full h-10"  [src]="(auth.user$ | async)?.picture"/>
         </button>
-      }
-      <span>Task Orchestration Service</span>
+      </div>
     </mat-toolbar>
 
       <p>{{(auth.user$ | async)?.name }}</p>
