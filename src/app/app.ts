@@ -3,7 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MatButtonModule } from "@angular/material/button"
 import { HttpClient } from '@angular/common/http';
-import { WithHttp } from './shared/decorators/with-http.decorator';
 import { SidenavLayoutComponent } from "./shared/components/sidenav-layout/sidenav-layout.component";
 
 @Component({
@@ -12,7 +11,6 @@ import { SidenavLayoutComponent } from "./shared/components/sidenav-layout/siden
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })  
-@WithHttp()
 export class App {
   protected readonly title = signal('UiTos');
 
