@@ -2,7 +2,6 @@ import { Component, signal, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MatButtonModule } from "@angular/material/button"
-import { ApiConfiguration, organizationGetAllGet } from './api';
 import { HttpClient } from '@angular/common/http';
 import { WithHttp } from './shared/decorators/with-http.decorator';
 import { SidenavLayoutComponent } from "./shared/components/sidenav-layout/sidenav-layout.component";
@@ -27,12 +26,5 @@ export class App {
     this.translateService.addLangs(['pt']);
     this.translateService.setFallbackLang('pt');
     this.translateService.use('pt');
-  }
-
-  ngOnInit(): void {
-    organizationGetAllGet(this.http, this.apiUrl, { top: '10' }).subscribe({
-      next: (response) => console.log('Organizations:', response),
-      error: (error) => console.error('Erro:', error)
-    });
   }
 }
