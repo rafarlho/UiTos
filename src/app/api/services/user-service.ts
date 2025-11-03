@@ -1,18 +1,28 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { GenericApiService } from '../generic-api-service';
-import { UserAddDTO } from '../../models/dtos/add/user.add-dto';
-import { UserUpdateDTO } from '../../models/dtos/update/user.update-dto';
-import { UserResultDTO } from '../../models/dtos/result/user.result-dto';
+import { UserAddDTO } from '../../models/user/user.add.dto';
+import { UserUpdateDTO } from '../../models/user/user.update.dto';
+import { UserResultDTO } from '../../models/user/user.result-dto';
+import { UserResultAdapter } from '../../models/user/user-result.adapter';
 import { Observable } from 'rxjs';
-import { Odata } from '../../models/generic/odata.model';
-import { tosApiUrl } from '../../environemnt';
+import { Odata } from '../../models/odata/odata.model';
+import { BaseService } from '../base-service';
+import { User } from '../../models/user/user.model';
+import { UserAddAdapter } from '../../models/user/user-add.adapter';
+import { UserUpdateAdapter } from '../../models/user/user-update,adapter';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends GenericApiService<UserResultDTO, UserAddDTO, UserUpdateDTO>  {
+export class UserService extends BaseService<User, UserResultDTO, UserAddDTO, UserUpdateDTO> {
   
-  constructor() {
-    super()
-    this.setAdditionalUrl("/user")
+  constructor(
+    protected genericApi : GenericApiService<UserResultDTO, UserAddDTO, UserUpdateDTO>,
+    protected override resultAdapter : UserResultAdapter,
+    protected override addAdapter : UserAddAdapter,
+    protected override updateAdapter : UserUpdateAdapter
+  ) {
+    super(genericApi, resultAdapter, addAdapter, updateAdapter)
+
+    this.genericApi.setAdditionalUrl("/user");
   }
 }

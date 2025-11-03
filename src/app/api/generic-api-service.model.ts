@@ -1,9 +1,9 @@
 import { Observable } from "rxjs"
-import { Odata } from "../models/generic/odata.model"
+import { OdataResultDTO } from "../models/odata/odata.result-dto"
 
-export interface GenericApiService<T,R,S> {
-    getAll(query?:string): Observable<Odata<T>> 
-    add(entity: R): Observable<R>
-    update(entity:S): Observable<S>
+export interface GenericApiService<ResultDTO,AddDTO,UpdateDTO> {
+    getAll(query?:string): Observable<OdataResultDTO<ResultDTO>> 
+    add(entity: AddDTO): Observable<ResultDTO>
+    update(entity:UpdateDTO): Observable<ResultDTO>
 }
 

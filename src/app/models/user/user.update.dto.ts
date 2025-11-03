@@ -1,7 +1,7 @@
-import { BaseFieldsDTO } from "../../generic/base-fields-dto.model";
+import { BaseFieldsDTO } from "../generic/base-fields-dto.model";
 
 export interface UserUpdateDTO extends BaseFieldsDTO {
       fullName: string,
-      username: string,
+      userName: string,
       email: string,
 }
