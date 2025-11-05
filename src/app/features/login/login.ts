@@ -25,7 +25,7 @@ export class Login {
   handleLoginClick() {
     this.auth.loginWithPopup().then(()=> {
       console.log(this.auth.getUser().then((data)=> console.log(data)) )
-      this.router.navigate(["home"])
+      this.router.navigate(["/home"])
     })
     .catch((reason: any) => {console.log(reason)})
   }

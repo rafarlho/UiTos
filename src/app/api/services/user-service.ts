@@ -4,7 +4,7 @@ import { UserAddDTO } from '../../models/user/user.add.dto';
 import { UserUpdateDTO } from '../../models/user/user.update.dto';
 import { UserResultDTO } from '../../models/user/user.result-dto';
 import { UserResultAdapter } from '../../models/user/user-result.adapter';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Odata } from '../../models/odata/odata.model';
 import { BaseService } from '../base-service';
 import { User } from '../../models/user/user.model';
@@ -23,6 +23,11 @@ export class UserService extends BaseService<User, UserResultDTO, UserAddDTO, Us
   ) {
     super(genericApi, resultAdapter, addAdapter, updateAdapter)
 
-    this.genericApi.setAdditionalUrl("/user");
+    this.genericApi.additionalUrl = "/user";
+  }
+
+  loginAndGetOrganizations(user:User) {
+    const addDto = this.addAdapter.adapt(user)
+    return this.genericApi.httpClient.post<UserResultDTO>(this.genericApi.url + "/LoginAndGetOrganizations", addDto).pipe(map((user: UserResultDTO)=> this.resultAdapter.adapt(user)))
   }
 }

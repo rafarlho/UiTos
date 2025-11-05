@@ -10,14 +10,14 @@ import { OdataResultAdapter } from '../models/odata/odata-result.adapter';
 })
 export class GenericApiService<ResultDTO,AddDTO,UpdateDTO> implements IGenericApiService<ResultDTO,AddDTO,UpdateDTO>{
 
-  private readonly httpClient = inject(HttpClient)
+  readonly httpClient = inject(HttpClient)
   protected apiUrl = tosApiUrl
 
   public odataResultAdapter = inject(OdataResultAdapter)
 
-  public setAdditionalUrl(additionalUrl: string): void {
-    this.apiUrl += additionalUrl
-  }
+  public get url() { return this.apiUrl}
+
+  public set additionalUrl(controllerName: string) {this.apiUrl += controllerName}
 
   getAll(query?: string): Observable<OdataResultDTO<ResultDTO>> {
     return this.httpClient.get<OdataResultDTO<ResultDTO>>(this.apiUrl + "/getAll" + (query ?? ""))

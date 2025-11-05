@@ -1,3 +1,27 @@
-<app-sidenav-layout>
+<div class="flex w-dvw h-dvh justify-center">
 
-</app-sidenav-layout>
+    @if (user()) {
+        @for(organization of organizations();track $index) {
+            
+        }@empty {
+            <mat-card class="sm:h-[50dvh] lg:h-[20dvh]  w-[70%] self-center justify-between p-5" appearance="outlined">
+                <mat-card-header>
+                    <mat-card-subtitle>{{"HOME.WELCOME" | translate}}</mat-card-subtitle>
+                    <mat-card-title>{{user()?.FullName}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <span></span>
+                </mat-card-content>
+                <mat-card-footer class="flex justify-center">
+                    <button matFab extended>
+                        Create a organization
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </mat-card-footer>
+            </mat-card>
+
+        }
+    } @else {
+        Waaiting for your authentication...
+    }
+</div>
