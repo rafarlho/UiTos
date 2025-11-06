@@ -1,6 +1,7 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { User } from '../models/user/user.model';
 import { computed } from '@angular/core';
+import { Organization } from '../models/organization/organization.model';
 
 
 type UserState = {
@@ -28,6 +29,18 @@ export const UserStore = signalStore(
         //Logsout user
         logout():void {
             patchState(store, (state) => ({user: null, isUserValid: false}))
+        },
+
+        addOrganization(organization: Organization):void {
+            patchState(store, (state) => {
+                if (!state.user) return state
+                return {
+                    user: {
+                        ...state.user,
+                        Organizations: [...(state.user.Organizations ?? []), organization]
+                    } as User
+                };
+            });
         }
     }))
 );

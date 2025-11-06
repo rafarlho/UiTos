@@ -25,6 +25,7 @@ export abstract class BaseService<Model, ResultDTO, AddDTO, UpdateDTO> {
     
     add(model: Model): Observable<Model> {
         const addDto: AddDTO = this.addAdapter.adapt(model);
+        console.log(addDto)
         return this.apiService.add(addDto).pipe(
             map((resultDto: ResultDTO)=> this.resultAdapter.adapt(resultDto))
         );

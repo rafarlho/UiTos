@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>
+    {{data.title | translate }}
+</h2>
+
+<mat-dialog-content>
+    @if(data.description) {
+        <span>{{data.description | translate }}</span>
+    }
+    @if(data.formFields) {
+        <form [formGroup]="form" (ngSubmit)="submitFormly()">
+            <formly-form [form]="form" [fields]="data.formFields.fields" [model]="model"></formly-form>
+        </form>
+    }
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button matButton mat-dialog-close>{{"CLOSE" | translate}}</button>
+        @for (action of data.actions; track action.text) {
+            <button 
+                matButton="" 
+                (click)="action.isSubmit ? submitFormly() : executeAction(action)"
+            >
+            {{ action.text | translate}}
+            </button>
+        }
+</mat-dialog-actions>

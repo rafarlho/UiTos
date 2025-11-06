@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Injector } from '@angular/core';
 import { GenericApiService } from '../generic-api-service';
 import { UserAddDTO } from '../../models/user/user.add.dto';
 import { UserUpdateDTO } from '../../models/user/user.update.dto';
@@ -16,18 +16,18 @@ import { UserUpdateAdapter } from '../../models/user/user-update,adapter';
 export class UserService extends BaseService<User, UserResultDTO, UserAddDTO, UserUpdateDTO> {
   
   constructor(
-    protected genericApi : GenericApiService<UserResultDTO, UserAddDTO, UserUpdateDTO>,
     protected override resultAdapter : UserResultAdapter,
     protected override addAdapter : UserAddAdapter,
     protected override updateAdapter : UserUpdateAdapter
   ) {
-    super(genericApi, resultAdapter, addAdapter, updateAdapter)
+    const api = new GenericApiService<UserResultDTO, UserAddDTO, UserUpdateDTO>();
+    super(api, resultAdapter, addAdapter, updateAdapter)
 
-    this.genericApi.additionalUrl = "/user";
+    this.apiService.additionalUrl = "/user";
   }
 
   loginAndGetOrganizations(user:User) {
     const addDto = this.addAdapter.adapt(user)
-    return this.genericApi.httpClient.post<UserResultDTO>(this.genericApi.url + "/LoginAndGetOrganizations", addDto).pipe(map((user: UserResultDTO)=> this.resultAdapter.adapt(user)))
+    return this.apiService.httpClient.post<UserResultDTO>(this.apiService.url + "/LoginAndGetOrganizations", addDto).pipe(map((user: UserResultDTO)=> this.resultAdapter.adapt(user)))
   }
 }

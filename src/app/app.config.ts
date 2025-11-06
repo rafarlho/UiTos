@@ -6,6 +6,8 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { authHttpInterceptorFn, provideAuth0 } from '@auth0/auth0-angular';
+import { provideFormlyCore } from '@ngx-formly/core'
+import { withFormlyMaterial } from '@ngx-formly/material';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -38,7 +40,8 @@ export const appConfig: ApplicationConfig = {
             prefix: './i18n/',
             suffix: '.json'
         })
-    })
+    }),
+    provideFormlyCore(withFormlyMaterial()),
             
   ]
 };

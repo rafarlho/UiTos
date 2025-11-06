@@ -1,5 +1,13 @@
 {
     "HOME": {
-        "WELCOME": "Bem vind@"
+        "WELCOME": "Bem vind@",
+        "NO_ORGANIZATIONS": "Parece que não tens nenhuma organização.\n usa o botão e preenche o formulário para começar!",
+        "CREATE_ORGANIZATION":"Criar uma organização",
+        "ORGANIZATION":"Organização",
+        "DESCRIPTION":"Descrição",
+        "LOCATION":"Localização",
+        "VIEW":"Explorar",
+        "ADD_ORGANIZATION":"Adicionar organização"
+
     }
 }
