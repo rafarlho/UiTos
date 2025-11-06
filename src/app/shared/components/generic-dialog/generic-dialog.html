@@ -18,6 +18,7 @@
         @for (action of data.actions; track action.text) {
             <button 
                 matButton="" 
+                [disabled]="action.isSubmit ? !form.valid : false"
                 (click)="action.isSubmit ? submitFormly() : executeAction(action)"
             >
             {{ action.text | translate}}

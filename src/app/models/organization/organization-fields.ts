@@ -1,33 +1,44 @@
-import { FormlyFieldConfig } from "@ngx-formly/core";
-import { OrganizationFields } from "./organization.model";
+import { inject, Injectable } from '@angular/core';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { TranslateService } from '@ngx-translate/core';
+import { OrganizationFieldNames } from './organization.model';
 
-export const organizationFields : FormlyFieldConfig[] = 
-[
-    {
-        key: OrganizationFields.Name,
-        type: 'input',
-        props: {
-            label: 'Email address',
-            placeholder: 'Enter email',
-            required: true,
-        }
-    },
-    {
-        key: OrganizationFields.Description,
-        type: 'input',
-        props: {
-            label: 'Descrip',
-            placeholder: 'Enter email',
-            required: true,
-        }
-    },
-    {
-        key: OrganizationFields.Location,
-        type: 'input',
-        props: {
-            label: 'Location',
-            placeholder: 'Enter email',
-            required: true,
-        }
-    }
-]
+@Injectable({
+  providedIn: 'root'
+})
+export class OrganizationFieldsService {
+  private translateService = inject(TranslateService)
+  organizationFields : FormlyFieldConfig[] = 
+  [
+      {
+          key: OrganizationFieldNames.Name,
+          type: 'input',
+          props: {
+              required: true,
+          },
+          expressions: {
+              'props.label': this.translateService.stream('NAME'),
+          },
+      },
+      {
+          key: OrganizationFieldNames.Description,
+          type: 'input',
+          props: {
+              required: true,
+          },
+          expressions: {
+              'props.label': this.translateService.stream('DESCRIPTION'),
+          },
+      },
+      {
+          key: OrganizationFieldNames.Location,
+          type: 'input',
+          props: {
+              required: true,
+          },
+          expressions: {
+              'props.label': this.translateService.stream('LOCATION'),
+          },
+      }
+  ]
+}

@@ -5,7 +5,7 @@ import { DialogAction, GenericDialogData } from '../../../models/generic/generic
 import { TranslatePipe } from '@ngx-translate/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { finalize, Observable, take, tap } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-generic-dialog',
@@ -28,37 +28,25 @@ export class GenericDialog {
 
 executeAction(action: DialogAction) {
     if (!action.callback) return;
-    
     const result = action.callback(this.model);
-    
-    // 1. Usa uma verificação mais segura para Observable
-    if (result instanceof Observable) { 
-        
-        console.log("Observable detectado. A subscrever...");
-        
-        result.pipe(
-            take(1),
-            tap(data => console.log("TAP: Dados recebidos!", data)), // Verifica se chega aqui
-            finalize(() => console.log("FINALIZE: Observable Terminou.")) // Verifica se termina
-        ).subscribe({
-            next: (response) => {
-                console.log("NEXT: Resposta Recebida!", action, response);
-                if (action.closeDialog !== false) {
-                    this.dialogRef.close(response); 
-                }
-            },
-            error: (err) => {
-                console.error("ERRO na Observable:", err); // Verifica se chega aqui
-                // TODO HANDLE ERRORS!!! (Boa prática é fechar com erro ou mostrar notificação)
-            }
-        });
-    } else {
-        console.log("Resultado não-Observable. Fechando:", result);
-        if (action.closeDialog !== false) {
-            this.dialogRef.close(result); 
+    if (result && typeof (result as Observable<any>).subscribe === 'function') {
+      
+      (result as Observable<any>).pipe(take(1),tap(data => console.log(data))).subscribe({
+        next: (response) => {
+          if (action.closeDialog !== false) {
+            this.dialogRef.close(response); 
+          }
+        },
+        error: (err) => {
+          //TODO HANDLE ERRORS!!!
         }
+      });
+    } else {
+      if (action.closeDialog !== false) {
+        this.dialogRef.close(result); 
+      }
     }
-}
+  }
 
   submitFormly() {
     if (this.data.formFields && this.data.formFields.callback && this.form.valid) {

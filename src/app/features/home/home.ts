@@ -12,9 +12,9 @@ import { NgxDotpatternComponent } from '@omnedia/ngx-dotpattern';
 import { GenericDialogData } from '../../models/generic/generic-dialog-data';
 import { GenericDialog } from '../../shared/components/generic-dialog/generic-dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { organizationFields } from '../../models/organization/organization-fields';
-import { Organization, OrganizationFields } from '../../models/organization/organization.model';
+import { Organization, OrganizationFieldNames } from '../../models/organization/organization.model';
 import { OrganizationService } from '../../api/services/organization-service';
+import { OrganizationFieldsService } from '../../models/organization/organization-fields';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +35,7 @@ export class Home {
   private readonly organizationService = inject(OrganizationService)
   private readonly userStore = inject(UserStore)
   private readonly dialog = inject(MatDialog)
+  private readonly organizationFields = inject(OrganizationFieldsService).organizationFields
   
   user : Signal<User | null> = computed(()=>this.userStore.user())
   organizations = this.userStore.organizations
@@ -61,7 +62,7 @@ export class Home {
       title: "HOME.CREATE_ORGANIZATION",
       description:"HOME.CREATE_ORGANIZATION_DESCRIPTION",
       formFields: {
-        fields: organizationFields,
+        fields: this.organizationFields,
         model: {
           "Owner" : this.userStore.user()
         },
@@ -79,7 +80,8 @@ export class Home {
     })
 
     dialogRef.afterClosed().pipe(take(1)).subscribe((result:any) => {
-      this.userStore.addOrganization(result)
+      if(result)
+        this.userStore.addOrganization(result)
     })
   }
 }

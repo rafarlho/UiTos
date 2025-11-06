@@ -8,7 +8,7 @@ export interface Organization extends BaseFields {
     Owner?: User
 }
 
-export const OrganizationFields = {
+export const OrganizationFieldNames = {
     Name: "Name",
     Description: "Description",
     Location: "Location",

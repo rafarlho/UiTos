@@ -7,7 +7,14 @@
         "DESCRIPTION":"Descrição",
         "LOCATION":"Localização",
         "VIEW":"Explorar",
-        "ADD_ORGANIZATION":"Adicionar organização"
+        "ADD_ORGANIZATION":"Adicionar organização",
+        "CREATE_ORGANIZATION_DESCRIPTION":"Preenche os campos e submete o formulário para criares uma nova organização e começares já a geri-la!"
+    },
 
-    }
+    "CREATE":"Criar",
+    "CLOSE":"Fechar",
+
+    "NAME":"Nome",
+    "DESCRIPTION":"Descrição",
+    "LOCATION":"Localilzação"
 }
