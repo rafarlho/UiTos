@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Organization, OrganizationFieldNames } from '../../models/organization/organization.model';
 import { OrganizationService } from '../../api/services/organization-service';
 import { OrganizationFieldsService } from '../../models/organization/organization-fields';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +37,8 @@ export class Home {
   private readonly userStore = inject(UserStore)
   private readonly dialog = inject(MatDialog)
   private readonly organizationFields = inject(OrganizationFieldsService).organizationFields
-  
+  private readonly router = inject(Router)
+
   user : Signal<User | null> = computed(()=>this.userStore.user())
   organizations = this.userStore.organizations
   
@@ -83,5 +85,10 @@ export class Home {
       if(result)
         this.userStore.addOrganization(result)
     })
+  }
+
+  goToOrganization(org: Organization) {
+    this.userStore.setSelectedOrg(org)
+    this.router.navigate(["/organization"])
   }
 }

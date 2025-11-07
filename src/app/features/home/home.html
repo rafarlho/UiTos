@@ -17,7 +17,7 @@
                         <p>{{"HOME.LOCATION" | translate}} {{organization.Location}}</p>
                     </mat-card-content>
                     <mat-card-footer class="flex justify-center">
-                        <button matFab extended (click)="createOrganization()">
+                        <button matFab extended (click)="goToOrganization(organization)">
                             {{"HOME.VIEW" | translate}}
                             <mat-icon>open_in_new</mat-icon>
                         </button>

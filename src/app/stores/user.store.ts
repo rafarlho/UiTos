@@ -7,11 +7,13 @@ import { Organization } from '../models/organization/organization.model';
 type UserState = {
   user: User | null
   isUserValid: boolean
+  selectedOrg: Organization | null
 };
 
 const initialState: UserState = {
     user: null,
-    isUserValid:false
+    isUserValid:false,
+    selectedOrg: null
 };
 
 export const UserStore = signalStore(
@@ -41,6 +43,10 @@ export const UserStore = signalStore(
                     } as User
                 };
             });
+        },
+
+        setSelectedOrg(org: Organization| null):void {
+            patchState(store, (state) => ({...state, selectedOrg: org}))
         }
     }))
 );
