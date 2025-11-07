@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '@auth0/auth0-angular';
+import { RouterLink, RouterLinkActive } from "@angular/router";
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sidenav-layout',
@@ -21,7 +23,10 @@ import { AuthService } from '@auth0/auth0-angular';
     MatListModule,
     MatIconModule,
     AsyncPipe,
-  ]
+    RouterLink,
+    TranslatePipe,
+    RouterLinkActive
+]
 })
 export class SidenavLayoutComponent {
   private breakpointObserver = inject(BreakpointObserver);

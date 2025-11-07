@@ -19,6 +19,18 @@ export const routes: Routes = [
     {
         path: "organization",
         canActivate: [authGuardFn],
-        loadComponent: () => import('./features/organization/organization').then(c => c.Organization)
+        loadComponent: () => import('./features/organization/organization').then(c => c.Organization),
+        children: [
+            {
+                path: "landing",
+                loadComponent: () => import('./features/organization/landing/landing').then(c => c.Landing),
+                // outlet: 'organization'
+            },
+            {
+                path: "members",
+                loadComponent: () => import('./features/organization/members/members').then(c => c.Members),
+                // outlet: 'organization'
+            }
+        ]
     }
 ];
