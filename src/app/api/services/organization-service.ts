@@ -7,7 +7,7 @@ import { OrganizationAddDTO } from '../../models/organization/organization.add.d
 import { OrganizationUpdateDTO } from '../../models/organization/organization.update.dto';
 import { OrganizationResultAdapter } from '../../models/organization/organization-result.adapter';
 import { OrganizationAddAdapter } from '../../models/organization/organization-add.adapter';
-import { OrganizationUpdateAdapter } from '../../models/organization/organization-update,adapter';
+import { OrganizationUpdateAdapter } from '../../models/organization/organization-update.adapter';
 @Injectable({
   providedIn: 'root',
 })

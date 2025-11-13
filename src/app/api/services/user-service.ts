@@ -9,7 +9,7 @@ import { Odata } from '../../models/odata/odata.model';
 import { BaseService } from '../base-service';
 import { User } from '../../models/user/user.model';
 import { UserAddAdapter } from '../../models/user/user-add.adapter';
-import { UserUpdateAdapter } from '../../models/user/user-update,adapter';
+import { UserUpdateAdapter } from '../../models/user/user-update.adapter';
 @Injectable({
   providedIn: 'root'
 })
