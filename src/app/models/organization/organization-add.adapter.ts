@@ -16,5 +16,5 @@ export class OrganizationAddAdapter implements ModelAdapter<Organization, Organi
     });
 
     adaptArray = (entities: Organization[]): OrganizationAddDTO[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }   

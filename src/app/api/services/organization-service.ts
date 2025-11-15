@@ -8,6 +8,7 @@ import { OrganizationUpdateDTO } from '../../models/organization/organization.up
 import { OrganizationResultAdapter } from '../../models/organization/organization-result.adapter';
 import { OrganizationAddAdapter } from '../../models/organization/organization-add.adapter';
 import { OrganizationUpdateAdapter } from '../../models/organization/organization-update.adapter';
+import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,4 +24,9 @@ export class OrganizationService extends BaseService<Organization, OrganizationR
 
     this.apiService.additionalUrl = "/organization";
   }
+
+  
+  getDetailedById(id: number) {
+      return this.apiService.httpClient.get<OrganizationResultDTO>(this.apiService.url + "/GetDetailedById/" + id).pipe(map((entity: OrganizationResultDTO)=> this.resultAdapter.adapt(entity)))
+    }
 }

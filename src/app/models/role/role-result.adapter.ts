@@ -18,5 +18,5 @@ export class RoleResultAdapter implements ModelAdapter<RoleResultDTO, Role> {
     });
 
     adaptArray = (entities: RoleResultDTO[]): Role[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

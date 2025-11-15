@@ -3,6 +3,7 @@ import { ModelAdapter } from "../../core/contracts/model-adapter";
 import { ProductionStationResultDTO } from "./production-station.result-dto";
 import { ProductionStation } from "./production-station.model";
 import { OrganizationResultAdapter } from "../organization/organization-result.adapter";
+import { ProductionStationMemberResultAdapter } from "../production-station-member/production-station-member-result.adapter";
 
 
 @Injectable({
@@ -12,7 +13,8 @@ export class ProductionStationResultAdapter implements ModelAdapter<ProductionSt
 
     private injector = inject(Injector)
 
-    private get OrganizationAdapter(): OrganizationResultAdapter { return this.injector.get(OrganizationResultAdapter) }
+    private get organizationAdapter(): OrganizationResultAdapter { return this.injector.get(OrganizationResultAdapter) }
+    private get productionStationMemberAdapter(): ProductionStationMemberResultAdapter { return this.injector.get(ProductionStationMemberResultAdapter) }
 
     adapt = (entity: ProductionStationResultDTO): ProductionStation => 
     ({
@@ -22,9 +24,10 @@ export class ProductionStationResultAdapter implements ModelAdapter<ProductionSt
         RowVersion: entity.rowVersion,
         Name: entity.name,
         Description: entity.description,
-        Organization: this.OrganizationAdapter.adapt(entity.organization)
+        Organization: entity.organization ? this.organizationAdapter.adapt(entity.organization) : entity.organization,
+        Members: this.productionStationMemberAdapter.adaptArray(entity.members)
     });
 
     adaptArray = (entities: ProductionStationResultDTO[]): ProductionStation[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : [];
 }

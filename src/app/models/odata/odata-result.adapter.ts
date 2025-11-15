@@ -14,5 +14,5 @@ export class OdataResultAdapter<T> implements ModelAdapter<OdataResultDTO<T>, Od
     });
 
     adaptArray = (entities: OdataResultDTO<T>[]): Odata<T>[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

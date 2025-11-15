@@ -14,5 +14,5 @@ export class ProductionTaskAddAdapter implements ModelAdapter<ProductionTask , P
     });
 
     adaptArray = (entities: ProductionTask[]): ProductionTaskAddDTO[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

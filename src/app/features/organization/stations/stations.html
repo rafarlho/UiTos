@@ -1,0 +1,13 @@
+<div class="h-full w-full p-5 overflow-auto stations relative">
+    <button class="absolute! top-6.5 right-5" matButton="filled" (click)="createStation()">{{ "ADD_STATION" | translate}}</button>
+    <mat-tab-group>
+
+        @for (station of stations(); track $index) {
+            <mat-tab [label]="station.Name">
+                <p>{{station.Name}}</p>
+                <p>{{station.Description}}</p>
+            </mat-tab>
+        }
+    </mat-tab-group>
+    
+</div>

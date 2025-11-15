@@ -1,0 +1,24 @@
+.mat-mdc-tab-header {
+    margin-right: 200px !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .mdc-tab__text-label {
+        color: white !important;
+    }
+    .mat-mdc-tab-header-pagination-disabled{
+        .mat-mdc-tab-header-pagination-chevron{
+            border-color: grey;
+        }
+    }
+    .mat-mdc-tab-header-pagination-after {
+        .mat-mdc-tab-header-pagination-chevron{
+            border-color: white;
+        }
+    } 
+    .mat-mdc-tab-header-pagination-before{
+        .mat-mdc-tab-header-pagination-chevron{
+            border-color: white;
+        }
+    }
+}

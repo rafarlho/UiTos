@@ -42,5 +42,5 @@ export class ChoreResultAdapter implements ModelAdapter<ChoreResultDTO, Chore> {
     });
 
     adaptArray = (entities: ChoreResultDTO[]): Chore[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

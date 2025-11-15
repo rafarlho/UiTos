@@ -10,10 +10,10 @@ export class ProductionStationAddAdapter implements ModelAdapter<ProductionStati
     adapt = (entity: ProductionStation): ProductionStationAddDTO => 
     ({
         name: entity.Name,
-        organizationId: entity.Organization.Id,
+        organizationId: entity.Organization!.Id,
         description: entity.Description
     });
 
     adaptArray = (entities: ProductionStation[]): ProductionStationAddDTO[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

@@ -16,5 +16,5 @@ export class UserAddAdapter implements ModelAdapter<User , UserAddDTO> {
     });
 
     adaptArray = (entities: User[]): UserAddDTO[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

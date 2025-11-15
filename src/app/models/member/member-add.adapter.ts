@@ -16,5 +16,5 @@ export class MemberAddAdapter implements ModelAdapter<Member , MemberAddDTO> {
     });
 
     adaptArray = (entities: Member[]): MemberAddDTO[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

@@ -15,11 +15,11 @@ export class ProductionStationUpdateAdapter implements ModelAdapter<ProductionSt
         dbStatus: entity.DbStatus,
         rowVersion: entity.RowVersion,
         name: entity.Name,
-        organizationId: entity.Organization.Id,
+        organizationId: entity.Organization!.Id,
         description: entity.Description
 
     });
 
     adaptArray = (entities: ProductionStation[]): ProductionStationUpdateDTO[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

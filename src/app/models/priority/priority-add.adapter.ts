@@ -13,5 +13,5 @@ export class PriorityAddAdapter implements ModelAdapter<Priority , PriorityAddDT
     });
 
     adaptArray = (entities: Priority[]): PriorityAddDTO[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

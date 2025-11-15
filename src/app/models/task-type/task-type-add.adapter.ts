@@ -13,5 +13,5 @@ export class TaskTypeAddAdapter implements ModelAdapter<TaskType , TaskTypeAddDT
     });
 
     adaptArray = (entities: TaskType[]): TaskTypeAddDTO[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

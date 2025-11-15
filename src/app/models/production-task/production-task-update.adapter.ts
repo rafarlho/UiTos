@@ -18,5 +18,5 @@ export class ProductionTaskUpdateAdapter implements ModelAdapter<ProductionTask,
     });
 
     adaptArray = (entities: ProductionTask[]): ProductionTaskUpdateDTO[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

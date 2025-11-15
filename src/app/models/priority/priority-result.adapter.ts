@@ -19,5 +19,5 @@ export class PriorityResultAdapter implements ModelAdapter<PriorityResultDTO, Pr
     });
 
     adaptArray = (entities: PriorityResultDTO[]): Priority[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }

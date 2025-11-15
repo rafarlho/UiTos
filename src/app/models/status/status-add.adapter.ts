@@ -13,5 +13,5 @@ export class StatusAddAdapter implements ModelAdapter<Status , StatusAddDTO> {
     });
 
     adaptArray = (entities: Status[]): StatusAddDTO[] => 
-        entities.map(entity => this.adapt(entity));
+        entities ? entities.map(entity => this.adapt(entity)) : []
 }
