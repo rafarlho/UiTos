@@ -23,9 +23,9 @@ export class MemberResultAdapter implements ModelAdapter<MemberResultDTO, Member
         DbCreatedOn: entity.dbCreatedOn,
         DbStatus: entity.dbStatus,
         RowVersion: entity.rowVersion,
-        Organization: this.organizationResultAdapter.adapt(entity.organization),
-        Role: this.roleResultAdapter.adapt(entity.role),
-        User: this.userResultAdapter.adapt(entity.user),
+        Organization: entity.organization ? this.organizationResultAdapter.adapt(entity.organization) : entity.organization,
+        Role: entity.role ? this.roleResultAdapter.adapt(entity.role) : entity.role,
+        User: entity.user ? this.userResultAdapter.adapt(entity.user) : entity.user,
     });
 
     adaptArray = (entities: MemberResultDTO[]): Member[] => 

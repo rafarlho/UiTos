@@ -22,8 +22,8 @@ export class ProductionStationMemberResultAdapter implements ModelAdapter<Produc
         DbCreatedOn: entity.dbCreatedOn,
         DbStatus: entity.dbStatus,
         RowVersion: entity.rowVersion,
-        Member: this.memberAdapter.adapt(entity.organizationMember),
-        ProductionStation: this.productionStationAdapter.adapt(entity.productionStation)
+        Member: entity.organizationMember ? this.memberAdapter.adapt(entity.organizationMember) : entity.organizationMember,
+        ProductionStation: entity.productionStation ? this.productionStationAdapter.adapt(entity.productionStation) : entity.productionStation
     });
 
     adaptArray = (entities: ProductionStationMemberResultDTO[]): ProductionStationMember[] => 

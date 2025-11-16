@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuardFn } from '@auth0/auth0-angular';
+import { evaluateSelectedOrgResolver } from './core/contracts/resolvers/evaluate-selected-org-resolver';
 
 export const routes: Routes = [
     {
@@ -19,6 +20,7 @@ export const routes: Routes = [
     {
         path: "organization",
         canActivate: [authGuardFn],
+        resolve: [evaluateSelectedOrgResolver],
         loadComponent: () => import('./features/organization/organization').then(c => c.Organization),
         children: [
             {

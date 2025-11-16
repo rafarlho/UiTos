@@ -1,11 +1,16 @@
-<div class="h-full w-full p-5 overflow-auto stations relative">
+<div class="flex flex-col flex-1 w-full p-5 relative">
     <button class="absolute! top-6.5 right-5" matButton="filled" (click)="createStation()">{{ "ADD_STATION" | translate}}</button>
-    <mat-tab-group>
-
+    <mat-tab-group class="flex-1">
         @for (station of stations(); track $index) {
             <mat-tab [label]="station.Name">
-                <p>{{station.Name}}</p>
-                <p>{{station.Description}}</p>
+                @defer (on viewport) {
+                    <!-- <app-station-detail [station]="station"></app-station-detail> -->
+                    <app-station-detail [station]="station"></app-station-detail>
+                } @placeholder {
+                    <div class="flex items-center justify-center h-full">
+                        Loading...
+                    </div>
+                }
             </mat-tab>
         }
     </mat-tab-group>

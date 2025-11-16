@@ -2,6 +2,10 @@
     margin-right: 200px !important;
 }
 
+.mat-mdc-tab-body-wrapper {
+    flex:1;
+}
+
 @media (prefers-color-scheme: dark) {
     .mdc-tab__text-label {
         color: white !important;

@@ -1,0 +1,62 @@
+<div class="flex flex-1">
+    <gridster [options]="options">
+
+        <gridster-item [item]="{ cols: 1, rows: 1, y: 0, x: 0 }">
+            <mat-card appearance="outlined" class="h-full rounded-none!">
+                <mat-card-header>
+                    <mat-card-title> {{ "STATION_DETAILS" | translate}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{"NAME" | translate }}: {{station().Name}}</p>
+                    <p>{{"DESCRIPTION" | translate }}: {{station().Description}}</p>
+                    <hr class="my-2">
+                    <div class="flex w-full justify-between items-center">
+                        <span class="text-lg">{{"MEMBERS" | translate}}</span>
+                        <button matButton="filled" (click)="addMembers()">{{ "ADD_MEMBER" | translate}}</button>
+                    </div>
+                    @for (member of members(); track $index) {
+                        <p>{{member.Member.User.FullName}}</p>
+                        <p>{{member.Member.Role.Name}}</p>
+                    }@empty {
+                        <p>{{"NO_MEMBERS" | translate}}</p>
+                    }
+                </mat-card-content>
+                <mat-card-actions>
+                </mat-card-actions>
+            </mat-card>
+        </gridster-item>
+
+        <gridster-item [item]="{ cols: 1, rows: 1, y: 1, x: 0 }">
+            <mat-card appearance="outlined" class="h-full rounded-none!">
+                <mat-card-header>
+                    <mat-card-title> {{ "STATS" | translate}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{station().Name}}</p>
+                    <p>{{station().Description}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                </mat-card-actions>
+            </mat-card>
+        </gridster-item>
+        <gridster-item [item]="{ cols: 1, rows: 2, y: 1, x: 0 }">
+            <mat-card appearance="outlined" class="h-full rounded-none!">
+                <mat-card-header>
+                    <mat-card-title>
+                        {{ "TASKS" | translate}}
+                        <button class="ml-5" matButton="filled" (click)="addMembers()">{{ "ADD_TASK" | translate}}</button>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{station().Name}}</p>
+                    <p>{{station().Description}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                </mat-card-actions>
+            </mat-card>
+        </gridster-item>
+        
+    </gridster>
+
+    
+</div>

@@ -8,6 +8,7 @@ import { ProductionStationMemberAddDTO } from '../../models/production-station-m
 import { ProductionStationMember } from '../../models/production-station-member/production-station-member.model';
 import { ProductionStationMemberResultDTO } from '../../models/production-station-member/production-station-member.result-dto';
 import { ProductionStationMemberUpdateDTO } from '../../models/production-station-member/production-station-member.update.dto';
+import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,5 +23,9 @@ export class ProductionStationMemberService extends BaseService<ProductionStatio
     super(api, resultAdapter, addAdapter, updateAdapter)
 
     this.apiService.additionalUrl = "/ProductionStationMember";
+  }
+
+  getDetailedByStationId(stationId: number) {
+    return this.apiService.httpClient.get<ProductionStationMemberResultDTO[]>(this.apiService.url + "/getDetailedByStationId/" + stationId).pipe(map((members: ProductionStationMemberResultDTO[]) => this.resultAdapter.adaptArray(members)))
   }
 }

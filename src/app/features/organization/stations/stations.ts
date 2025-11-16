@@ -14,6 +14,7 @@ import { ProductionStation } from '../../../models/production-station/production
 import { MatDialog } from '@angular/material/dialog';
 import { GenericDialog } from '../../../shared/components/generic-dialog/generic-dialog';
 import {MatTabsModule} from '@angular/material/tabs';
+import { StationDetail } from "./station-detail/station-detail";
 
 @Component({
   selector: 'app-stations',
@@ -21,20 +22,24 @@ import {MatTabsModule} from '@angular/material/tabs';
     TranslatePipe,
     MatToolbar,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    StationDetail
 ],
   templateUrl: './stations.html',
   styleUrl: './stations.scss',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    'class': 'flex flex-col flex-1'
+  }
 })
 export class Stations {
   private userStore = inject(UserStore)
   private organizationService = inject(OrganizationService)
   private stationService = inject(ProductionStationService)
   private dialog = inject(MatDialog)
+  
   private readonly stationFields = inject(ProductionStationFieldsService).stationFields
   stationFetcehed = toSignal(this.organizationService.getDetailedById(this.userStore.selectedOrg()!.Id).pipe(map((org: Organization) => org.Stations || [])))
-  
   stations : WritableSignal<ProductionStation[]> = linkedSignal(()=> this.stationFetcehed() || [])
 
   createStation() {
