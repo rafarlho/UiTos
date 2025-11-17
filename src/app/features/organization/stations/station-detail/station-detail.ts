@@ -11,14 +11,15 @@ import { Odata } from '../../../../models/odata/odata.model';
 import { ProductionStationMemberService } from '../../../../api/services/production-station-member-service';
 import { take } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
-
+import {MatTableModule} from '@angular/material/table';
 @Component({
   selector: 'app-station-detail',
   imports: [
     GridsterModule, 
     MatCardModule,
     TranslatePipe,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule
   ],
   templateUrl: './station-detail.html',
   styleUrl: './station-detail.scss',
@@ -27,7 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
   }
 })
 export class StationDetail {
-
+  displayedColumns: string[] = ['name', 'role'];
   station = input.required<ProductionStation>();
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
 
