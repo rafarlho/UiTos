@@ -8,3 +8,9 @@ export interface Member extends BaseFields {
     User: User
     Organization: Organization
 }
+
+export const MemberFieldNames = {
+    Role: "Role",
+    User: "User",
+    Organization: "Organization",
+}

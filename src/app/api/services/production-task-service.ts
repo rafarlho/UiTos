@@ -8,6 +8,8 @@ import { ProductionTaskAddDTO } from '../../models/production-task/production-ta
 import { ProductionTask } from '../../models/production-task/production-task.model';
 import { ProductionTaskResultDTO } from '../../models/production-task/production-task.result-dto';
 import { ProductionTaskUpdateDTO } from '../../models/production-task/production-task.update.dto';
+import { Odata } from '../../models/odata/odata.model';
+import { map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,5 +24,9 @@ export class ProductionTaskService extends BaseService<ProductionTask, Productio
     super(api, resultAdapter, addAdapter, updateAdapter)
 
     this.apiService.additionalUrl = "/ProductionTask";
+  }
+
+  GetAllDetailed(query: string) {
+    return this.apiService.httpClient.get<Odata<ProductionTaskResultDTO>>(this.apiService.url + "/getAllDetailed" + query).pipe(map((tasks:Odata<ProductionTaskResultDTO>) => ({Items: this.resultAdapter.adaptArray(tasks.Items),TotalItems: tasks.TotalItems})))
   }
 }

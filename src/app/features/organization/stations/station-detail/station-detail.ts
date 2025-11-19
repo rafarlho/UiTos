@@ -12,6 +12,8 @@ import { ProductionStationMemberService } from '../../../../api/services/product
 import { take } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
+import { ProductionTaskService } from '../../../../api/services/production-task-service';
+import { ProductionTask } from '../../../../models/production-task/production-task.model';
 @Component({
   selector: 'app-station-detail',
   imports: [
@@ -33,13 +35,15 @@ export class StationDetail {
   resizeEvent: EventEmitter<GridsterItem> = new EventEmitter<GridsterItem>();
 
   private readonly productionStationService = inject(ProductionStationMemberService)
-
+  private readonly tasksService = inject(ProductionTaskService)
   members : WritableSignal<ProductionStationMember[]> = signal([])
+  tasks : WritableSignal<ProductionTask[]> = signal([])
   
   constructor() {
     effect(()=> {
       if(this.station())
         this.fetchMembers()
+        this.fetchTasks()
     })
   }
   dashboard = [
@@ -63,6 +67,14 @@ export class StationDetail {
     fetchMembers() {
       this.productionStationService.getDetailedByStationId(this.station().Id).pipe(take(1)).subscribe({
         next: (members: ProductionStationMember[]) => this.members.set(members)
+      })
+    }
+
+    fetchTasks() {
+      const filter = {productionStationId: this.station().Id}
+      const query = buildQuery({filter})
+      this.tasksService.GetAllDetailed(query).pipe(take(1)).subscribe({
+        next: (tasks: Odata<ProductionTask>) => this.tasks.set(tasks.Items)
       })
     }
 

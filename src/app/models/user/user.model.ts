@@ -8,3 +8,11 @@ export interface User extends BaseFields {
     LatestLogin?: Date
     Organizations?: Organization[]
 }
+
+export const UserFieldNames = {
+    FullName: "FullName",
+    Email: "Email",
+    UserName: "UserName",
+    LatestLogin: "LatestLogin",
+    Organizations: "Organizations",
+}

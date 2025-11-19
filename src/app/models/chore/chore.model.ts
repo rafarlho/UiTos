@@ -18,3 +18,17 @@ export interface Chore extends BaseFields {
     FinishedOn?: Date
     EstimatedDuration?: number
 }
+
+export const ChoreFieldNames = {
+    ProductionTask: "ProductionTask",
+    ProductionStation: "ProductionStation",
+    ProductionStationMember: "ProductionStationMember",
+    TaskType: "TaskType",
+    Status: "Status",
+    Title: "Title",
+    Description: "Description",
+    ScheduledTo: "ScheduledTo",
+    StartedOn: "StartedOn",
+    FinishedOn: "FinishedOn",
+    EstimatedDuration: "EstimatedDuration",
+}

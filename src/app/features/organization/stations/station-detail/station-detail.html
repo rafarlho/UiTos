@@ -58,8 +58,13 @@
                     </mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <p>{{station().Name}}</p>
-                    <p>{{station().Description}}</p>
+                    @for (task of tasks(); track $index) {
+                        <p>{{task.Priority.Name}}</p>
+                        @for (chore of task.Chores; track $index) {
+                            <!-- <p>{{chore.Name}}</p> -->
+                        }
+
+                    }
                 </mat-card-content>
                 <mat-card-actions>
                 </mat-card-actions>

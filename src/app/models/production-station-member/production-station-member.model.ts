@@ -6,3 +6,8 @@ export interface ProductionStationMember extends BaseFields {
     Member : Member 
     ProductionStation : ProductionStation 
 }
+
+export const ProductionStationMemberFieldNames = {
+    Member: "Member",
+    ProductionStation: "ProductionStation",
+}
