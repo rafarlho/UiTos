@@ -1,1 +1,9 @@
-<p>members works!</p>
+<div class="flex flex-col flex-1 w-full p-5 relative">
+    <div class="flex gap-5 justify-end">
+        <button matButton="filled" [disabled]="selectedMembers().length === 0" color="warn" >{{ "DELETE_MEMBERS" | translate}}</button>
+        <button matButton="filled" [disabled]="selectedMembers().length === 0" color="accent" >{{ "EDIT_MEMBERS_ROLES" | translate}}</button>
+        <button matButton="filled" (click)="addMembers()" >{{ "ADD_MEMBERS" | translate}}</button>
+
+    </div>
+    <app-members-table [dataSource]="members()"  (selectionOut)="setSelection($event)"/>
+</div>

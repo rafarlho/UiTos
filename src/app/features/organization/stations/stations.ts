@@ -43,7 +43,6 @@ export class Stations {
   stations : WritableSignal<ProductionStation[]> = linkedSignal(()=> this.stationFetcehed() || [])
 
   createStation() {
-    console.log(this.stations())
       const dialogData: GenericDialogData = {
         title: "HOME.CREATE_STATION",
         description:"HOME.CREATE_ORGANIZATION_STATION",

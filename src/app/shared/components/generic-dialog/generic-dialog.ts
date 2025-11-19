@@ -31,7 +31,7 @@ executeAction(action: DialogAction) {
     const result = action.callback(this.model);
     if (result && typeof (result as Observable<any>).subscribe === 'function') {
       
-      (result as Observable<any>).pipe(take(1),tap(data => console.log(data))).subscribe({
+      (result as Observable<any>).pipe(take(1)).subscribe({
         next: (response) => {
           if (action.closeDialog !== false) {
             this.dialogRef.close(response); 

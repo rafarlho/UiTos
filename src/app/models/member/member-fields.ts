@@ -7,6 +7,7 @@ import { UserService } from '../../api/services/user-service';
 import { OrganizationService } from '../../api/services/organization-service';
 import { map } from 'rxjs';
 import { RoleFieldNames } from '../role/role.model';
+import { UserFieldNames } from '../user/user.model';
 
 @Injectable({
     providedIn: 'root'
@@ -19,39 +20,41 @@ export class MemberFieldsService {
 
     memberFields : FormlyFieldConfig[] = [
         {
-            key: MemberFieldNames.Role,
+            key: MemberFieldNames.Role+ ".Id",
             type: 'select',
             props: {
                 required: true,
                 options: this.roleService.getAll().pipe(map(value => value.Items)),
+                labelProp: RoleFieldNames.Name,                
                 valueProp: 'Id',
-                labelProp: RoleFieldNames.Name
             },
             expressions: {
                 'props.label': this.translateService.stream('ROLE'),
             },
         },
         {
-            key: MemberFieldNames.User,
+            key: MemberFieldNames.User + ".Id",
             type: 'select',
             props: {
                 required: true,
-                options: [] //TODO
+                options: this.userService.getAll().pipe(map(value => value.Items)),
+                valueProp: 'Id',
+                labelProp: UserFieldNames.FullName
             },
             expressions: {
                 'props.label': this.translateService.stream('USER'),
             },
         },
-        {
-            key: MemberFieldNames.Organization,
-            type: 'select',
-            props: {
-                required: true,
-                options: [] //TODO
-            },
-            expressions: {
-                'props.label': this.translateService.stream('ORGANIZATION'),
-            },
-        }
+        // {
+        //     key: MemberFieldNames.Organization,
+        //     type: 'select',
+        //     props: {
+        //         required: true,
+        //         options: [] //TODO
+        //     },
+        //     expressions: {
+        //         'props.label': this.translateService.stream('ORGANIZATION'),
+        //     },
+        // }
     ]
 }
