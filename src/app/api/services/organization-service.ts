@@ -25,8 +25,7 @@ export class OrganizationService extends BaseService<Organization, OrganizationR
     this.apiService.additionalUrl = "/organization";
   }
 
-  
   getDetailedById(id: number) {
-      return this.apiService.httpClient.get<OrganizationResultDTO>(this.apiService.url + "/GetDetailedById/" + id).pipe(map((entity: OrganizationResultDTO)=> this.resultAdapter.adapt(entity)))
-    }
+    return this.apiService.httpClient.get<OrganizationResultDTO>(this.apiService.url + "/GetDetailedById/" + id).pipe(map((entity: OrganizationResultDTO)=> this.resultAdapter.adapt(entity)))
+  }
 }

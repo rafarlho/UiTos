@@ -23,4 +23,5 @@ export class MemberService extends BaseService<Member, MemberResultDTO, MemberAd
 
     this.apiService.additionalUrl = "/organizationMember";
   }
+
 }

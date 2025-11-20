@@ -26,5 +26,8 @@ export class GenericApiService<ResultDTO,AddDTO,UpdateDTO> implements IGenericAp
   update(entity: UpdateDTO): Observable<ResultDTO> {
     return this.httpClient.put<ResultDTO>(this.apiUrl+ "/update", {...entity})
   }
+  updateMultiple(entity: UpdateDTO[]): Observable<ResultDTO[]> {
+    return this.httpClient.put<ResultDTO[]>(this.apiUrl+ "/updateMultiple", entity)
+  }
   
 }

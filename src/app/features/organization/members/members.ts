@@ -31,17 +31,21 @@ export class Members {
     this.fetchMembers()
 
     effect(()=> {
-      if(this.refresh()) 
+      if(this.refresh().update) 
         this.fetchMembers()
     })
   }
-
+  
   setSelection(members: Member[]) {
     this.selectedMembers.set(members)
   }
-
+  
   addMembers() {
     this.membersManageService.addMembers(this.userStore.selectedOrg()!, this.refresh)
+  }
+
+  editMembers() {
+    this.membersManageService.editMembersRole(this.userStore.selectedOrg()!,this.selectedMembers, this.refresh)
   }
 
   fetchMembers() {

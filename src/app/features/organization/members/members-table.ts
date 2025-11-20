@@ -54,8 +54,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-        (click)="selection.toggle(row)">
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
     </tr>
   </table>
   `,
@@ -84,6 +83,7 @@ export class MembersTable {
   
   toggleAllRows() {
     if (this.isAllSelected()) {
+      this.selection.clear()
       this.emitSelection()
       return;
     }
