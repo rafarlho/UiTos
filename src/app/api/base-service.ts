@@ -44,4 +44,10 @@ export abstract class BaseService<Model, ResultDTO, AddDTO, UpdateDTO> {
             map((resultDto: ResultDTO[]) => this.resultAdapter.adaptArray(resultDto))
         );
     }
+
+    disableMultiple(ids: number[]): Observable<number[]> {
+        const updateDto: UpdateDTO[] = this.updateAdapter.adaptArray(model);
+        return this.apiService.updateMultiple(updateDto).pipe(
+            map((resultDto: ResultDTO[]) => this.resultAdapter.adaptArray(resultDto))
+        );
 }
