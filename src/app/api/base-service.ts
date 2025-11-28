@@ -20,7 +20,7 @@ export abstract class BaseService<Model, ResultDTO, AddDTO, UpdateDTO> {
         return this.apiService.getAll(query).pipe(
             map((odataDto: OdataResultDTO<ResultDTO>) => this.apiService.odataResultAdapter.adapt(odataDto)), 
             map((odataModel: Odata<ResultDTO>) => ({...odataModel, Items: this.resultAdapter.adaptArray(odataModel.Items)})) 
-        );
+        )
     }
     
     add(model: Model): Observable<Model> {
@@ -28,26 +28,24 @@ export abstract class BaseService<Model, ResultDTO, AddDTO, UpdateDTO> {
         console.log(addDto)
         return this.apiService.add(addDto).pipe(
             map((resultDto: ResultDTO)=> this.resultAdapter.adapt(resultDto))
-        );
+        )
     }
     
     update(model: Model): Observable<Model> {
         const updateDto: UpdateDTO = this.updateAdapter.adapt(model);
         return this.apiService.update(updateDto).pipe(
             map((resultDto: ResultDTO) => this.resultAdapter.adapt(resultDto))
-        );
+        )
     }
 
     updateMultiple(model: Model[]): Observable<Model[]> {
         const updateDto: UpdateDTO[] = this.updateAdapter.adaptArray(model);
         return this.apiService.updateMultiple(updateDto).pipe(
             map((resultDto: ResultDTO[]) => this.resultAdapter.adaptArray(resultDto))
-        );
+        )
     }
 
-    disableMultiple(ids: number[]): Observable<number[]> {
-        const updateDto: UpdateDTO[] = this.updateAdapter.adaptArray(model);
-        return this.apiService.updateMultiple(updateDto).pipe(
-            map((resultDto: ResultDTO[]) => this.resultAdapter.adaptArray(resultDto))
-        );
+    disableMultiple(ids: number[]) {
+        return this.apiService.disableMultiple(ids)
+    }
 }

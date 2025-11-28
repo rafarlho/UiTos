@@ -29,5 +29,9 @@ export class GenericApiService<ResultDTO,AddDTO,UpdateDTO> implements IGenericAp
   updateMultiple(entity: UpdateDTO[]): Observable<ResultDTO[]> {
     return this.httpClient.put<ResultDTO[]>(this.apiUrl+ "/updateMultiple", entity)
   }
+
+  disableMultiple(ids: number[]) {
+    return this.httpClient.delete(this.apiUrl+ "/disableMultiple", {body: ids})
+  }
   
 }

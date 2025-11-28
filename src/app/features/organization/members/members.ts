@@ -48,6 +48,10 @@ export class Members {
     this.membersManageService.editMembersRole(this.userStore.selectedOrg()!,this.selectedMembers, this.refresh)
   }
 
+  removeMembers() {
+    this.membersManageService.removeMembers(this.selectedMembers, this.refresh)
+  }
+
   fetchMembers() {
     if(!this.userStore.selectedOrg()) return
 

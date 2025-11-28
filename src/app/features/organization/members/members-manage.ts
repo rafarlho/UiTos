@@ -6,7 +6,7 @@ import { GenericDialogData } from '../../../models/generic/generic-dialog-data';
 import { OrganizationFieldsService } from '../../../models/organization/organization-fields';
 import { MemberFieldsService } from '../../../models/member/member-fields';
 import { GenericDialog } from '../../../shared/components/generic-dialog/generic-dialog';
-import { of, take } from 'rxjs';
+import { finalize, of, take } from 'rxjs';
 import { Organization } from '../../../models/organization/organization.model';
 import { Role } from '../../../models/role/role.model';
 
@@ -55,7 +55,6 @@ export class MembersManage {
         fields: this.membersFields.filter(value => value.key === MemberFieldNames.Role+ ".Id"),
         callback: (object: {Role:Role}) => {
           const updatedList = selectedMembers().map(member => ({...member, Role: object.Role, Organization: organization}))
-          console.log(updatedList)
           return this.membersService.updateMultiple(updatedList)
         }
       },
@@ -71,8 +70,28 @@ export class MembersManage {
     })
 
     dialogRef.afterClosed().pipe(take(1)).subscribe((result:any) => {
+      console.log("HEREEE", result)
       if(result)
         refreshSignal.set({update:true})
     })
   }
+
+  removeMembers(selectedMembers: WritableSignal<Member[]>, refreshSignal: WritableSignal<Object>) {
+    const dialogData: GenericDialogData = {
+      title: "REMOVE_MEMBERS",
+      description:"REMOVER_MEMBERS_DESCRIPTION",
+      
+      actions: [{
+          text: "REMOVE",
+          description: "primary",
+          closeDialog: true,
+          callback: ()=> this.membersService.disableMultiple(selectedMembers().map(m => m.Id)).pipe(finalize(()=> refreshSignal.set({update:true})))
+        }]
+    } 
+    this.dialog.open(GenericDialog, {
+      data:dialogData,
+    })
+
+    
+  } 
 }
